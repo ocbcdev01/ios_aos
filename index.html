@@ -2,25 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>App Download Page</title>
+    <title>App Download</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f4f4f9; }
-        .btn { display: inline-block; padding: 15px 30px; margin: 15px; font-size: 18px; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; }
+        body { font-family: sans-serif; text-align: center; padding: 30px; }
+        
+        /* Switch Buttons */
+        .switch-box { margin-bottom: 20px; }
+        .tab-btn { padding: 10px 20px; font-size: 16px; cursor: pointer; margin: 0 5px; }
+        .active-btn { font-weight: bold; background: #ddd; }
+
+        /* Content Sections */
+        .content { display: none; margin: 20px 0; }
+        .show { display: block; }
+        
+        /* Table Button Styles */
+        .btn { display: inline-block; padding: 6px 12px; font-size: 14px; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; }
         .android { background: #3DDC84; }
         .ios { background: #000000; }
+
+        /* Simple Table */
+        table { margin: 20px auto; border-collapse: collapse; width: 400px; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: center; }
+        th { background: #f4f4f9; }
     </style>
 </head>
 <body>
-    <h1>Download My App !!</h1>
-    <p>Select your platform below to install the application.</p>
 
-    <!-- Android Link -->
-    <a href="files/app.apk" class="btn android">Download Android APK</a>
+    <h1>Download App</h1>
 
+    <!-- Platform Switch Buttons -->
+    <div class="switch-box">
+        <button id="b-ios" class="tab-btn active-btn" onclick="toggle('ios')">iOS</button>
+        <button id="b-aos" class="tab-btn" onclick="toggle('aos')">Android</button>
+    </div>
 
+    <!-- iOS Section -->
+    <div id="ios-section" class="content show">
+        <table>
+            <tr>
+                <th>Version</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>v1.0.0</td>
+                <td><a href="itms-services://?action=download-manifest&amp;url=https://ocbcdev01.github.io/ios_aos/manifest.plist" class="btn ios">📦 Don't not touch</a></td>
+            </tr>
+            <!--sample--->
+            <tr>
+                <td>v1.0.2</td>
+                <td><a href="itms-services://?action=download-manifest&amp;url=https://ocbcdev01.github.io/ios_aos/manifest.plist" class="btn ios">📦 Install iOS</a></td>
+            </tr>
+        </table>
+    </div>
 
-    <a href="itms-services://?action=download-manifest&amp;url=https://ocbcdev01.github.io/ios_aos/manifest.plist">
-       📦 Click to Install OCBC HK UAT
-    </a>
+    <!-- Android Section -->
+    <div id="aos-section" class="content">
+        <table>
+            <tr>
+                <th>Version</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>v1.0.0</td>
+                <td><a href="files/app_v100.apk" class="btn android">🤖 Download APK</a></td>
+            </tr>
+            <tr>
+                <td>v1.0.2</td>
+                <td><a href="files/app.apk" class="btn android">🤖 Download APK</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Simple Switch Logic -->
+    <script>
+        function toggle(platform) {
+            document.getElementById('ios-section').className = 'content' + (platform === 'ios' ? ' show' : '');
+            document.getElementById('aos-section').className = 'content' + (platform === 'aos' ? ' show' : '');
+            document.getElementById('b-ios').className = 'tab-btn' + (platform === 'ios' ? ' active-btn' : '');
+            document.getElementById('b-aos').className = 'tab-btn' + (platform === 'aos' ? ' active-btn' : '');
+        }
+    </script>
+
 </body>
 </html>
